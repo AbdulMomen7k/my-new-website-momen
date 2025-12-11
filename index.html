@@ -94,16 +94,16 @@
             border-bottom: 2px solid #3B82F6;
         }
 
-        /* --- Scroll Reveal Animation Styles (Restored) --- */
+        /* --- Scroll Reveal Animation Styles --- */
         .reveal {
-            opacity: 0; /* শুরুতে অদৃশ্য থাকবে */
-            transform: translateY(30px); /* একটু নিচে থাকবে */
-            transition: all 1s ease-out; /* ১ সেকেন্ড ধরে ভেসে উঠবে */
+            opacity: 0; 
+            transform: translateY(30px); 
+            transition: all 1s ease-out; 
         }
 
         .reveal.active {
-            opacity: 1; /* দৃশ্যমান হবে */
-            transform: translateY(0); /* সঠিক জায়গায় আসবে */
+            opacity: 1; 
+            transform: translateY(0); 
         }
     </style>
 </head>
@@ -197,7 +197,7 @@
                 <div class="absolute w-72 h-72 bg-blue-200/50 rounded-full blur-3xl -top-4 -right-4 animate-pulse"></div>
                 <div class="absolute w-72 h-72 bg-purple-200/50 rounded-full blur-3xl bottom-4 left-4 animate-pulse" style="animation-delay: 1s;"></div>
                 
-                <!-- Profile Image (Portrait) -->
+                <!-- Profile Image (Portrait) UPDATED with Correct Filename -->
                 <div class="relative w-64 h-80 md:w-80 md:h-[30rem] rounded-2xl overflow-hidden border-4 border-white shadow-2xl transform hover:scale-105 transition duration-500">
                     <img src="abdul123.png" alt="MD Abdul Momen" class="w-full h-full object-cover">
                 </div>
@@ -747,6 +747,7 @@
 
     <!-- Scripts -->
     <script>
+        // ... existing javascript ...
         // Typing Effect
         const textElement = document.getElementById('typing-text');
         const phrases = ["BBA Student", "Tech Learner", "Future Brand Builder"];
@@ -907,19 +908,32 @@
 
         revealElements.forEach(el => revealObserver.observe(el));
 
-        // Visitor Counter Logic (Start from 1)
+        // Visitor Counter Logic (Smart Counter - No increase on Reload)
         function updateVisitorCount() {
             const counterElement = document.getElementById('visitor-count');
             
+            // ১. লোকাল স্টোরেজ থেকে বর্তমান মোট ভিউ সংখ্যা নেওয়া
             let count = localStorage.getItem('page_views');
             
+            // যদি আগে কোনো ভিউ না থাকে, তাহলে ১ দিয়ে শুরু হবে
             if (!count) {
-                count = 1; // Start from 1
-            } else {
-                count = parseInt(count) + 1;
-            }
-            localStorage.setItem('page_views', count);
+                count = 1;
+                localStorage.setItem('page_views', count);
+            } 
             
+            // ২. চেক করা যে এই সেশনে (ব্রাউজার খোলা অবস্থায়) ভিজিটর আগে কাউন্ট হয়েছে কিনা
+            const hasVisitedSession = sessionStorage.getItem('visited_session');
+
+            if (!hasVisitedSession) {
+                // যদি এই সেশনে প্রথমবার হয়, তবেই সংখ্যা বাড়াবে
+                count = parseInt(count) + 1;
+                localStorage.setItem('page_views', count);
+                
+                // সেশনে মার্ক করে রাখা যে কাউন্ট করা হয়েছে
+                sessionStorage.setItem('visited_session', 'true');
+            }
+            
+            // ৩. সংখ্যাটি ওয়েবসাইটে দেখানো
             counterElement.innerText = count;
         }
         
