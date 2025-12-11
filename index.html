@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD Abdul Momen | Portfolio</title>
+    <!-- Tailwind CSS for Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6', // Blue accent
+                        dark: '#F2F2F0',    // Background Color
+                        card: '#FFFFFF',    // White Card Background
+                    },
+                    fontFamily: {
+                        sans: ['Segoe UI', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom CSS */
+        body {
+            background-color: #F2F2F0;
+            color: #1F2937;
+            overflow-x: hidden; /* Prevent horizontal scroll from animation offset */
+        }
+        
+        /* Cursor animation */
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: #3B82F6;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .nav-link {
+            position: relative;
+            color: #4B5563;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #3B82F6;
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #3B82F6;
+        }
+
+        /* Mobile Menu Transition */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateY(-100%);
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            z-index: 40;
+        }
+        
+        #mobile-menu.open {
+            transform: translateY(0);
+        }
+
+        /* Gallery Filter Active State */
+        .filter-btn.active {
+            color: #3B82F6;
+            border-bottom: 2px solid #3B82F6;
+        }
+
+        /* --- Scroll Reveal Animation Styles --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px) scale(0.95); /* Start slightly down and smaller */
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); /* Smooth easing */
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1); /* End at normal position and size */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-dark/90 backdrop-blur-md border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-primary">Port<span class="text-gray-900">folio.</span></a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="nav-link active px-3 py-2 text-sm font-medium transition">Home</a>
+                        <a href="#about" class="nav-link px-3 py-2 text-sm font-medium transition">About</a>
+                        <a href="#services" class="nav-link px-3 py-2 text-sm font-medium transition">Services</a>
+                        <a href="#skills" class="nav-link px-3 py-2 text-sm font-medium transition">Skills</a>
+                        <a href="#experience" class="nav-link px-3 py-2 text-sm font-medium transition">Experience</a>
+                        <a href="#projects" class="nav-link px-3 py-2 text-sm font-medium transition">Projects</a>
+                        <a href="#contact" class="px-4 py-2 bg-primary text-white rounded-md text-sm font-medium hover:bg-blue-600 transition">Contact Me</a>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-card border-b border-gray-200 shadow-xl -translate-y-[150%]">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
+                <a href="#home" class="mobile-link block px-3 py-2 text-base font-medium text-gray-600 hover:text-primary">Home</a>
+                <a href="#about" class="mobile-link block px-3 py-2 text-base font-medium text-gray-600 hover:text-primary">About</a>
+                <a href="#services" class="mobile-link block px-3 py-2 text-base font-medium text-gray-600 hover:text-primary">Services</a>
+                <a href="#skills" class="mobile-link block px-3 py-2 text-base font-medium text-gray-600 hover:text-primary">Skills</a>
+                <a href="#experience" class="mobile-link block px-3 py-2 text-base font-medium text-gray-600 hover:text-primary">Experience</a>
+                <a href="#projects" class="mobile-link block px-3 py-2 text-base font-medium text-gray-600 hover:text-primary">Projects</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-primary">Contact Me</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-16 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse md:flex-row items-center">
+            <div class="w-full md:w-1/2 text-center md:text-left mt-10 md:mt-0 reveal"> <!-- Added reveal -->
+                <p class="text-primary font-medium mb-2 text-lg">Hello, I'm</p>
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-4">MD Abdul Momen</h1>
+                <h2 class="text-2xl md:text-3xl text-gray-500 mb-8 flex justify-center md:justify-start">
+                    I am a&nbsp;<span id="typing-text" class="text-gray-900"></span><span class="cursor">&nbsp;</span>
+                </h2>
+                
+                <!-- Quote Style Description -->
+                <div class="mb-10 max-w-lg mx-auto md:mx-0 text-left">
+                    <div class="border-l-4 border-teal-500 pl-6 py-2">
+                        <p class="text-gray-700 italic text-lg leading-relaxed font-medium">
+                            "I am a creative Video Editor and a dedicated BBA Student. I love telling stories through video and have a passion for business management."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Buttons with Icons -->
+                <div class="flex justify-center md:justify-start gap-4">
+                    <a href="#projects" class="px-7 py-3.5 bg-primary text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300 shadow-lg shadow-blue-500/30 flex items-center group">
+                        <i class="fas fa-eye mr-2 group-hover:scale-110 transition-transform"></i> View Work
+                    </a>
+                    <a href="#contact" class="px-7 py-3.5 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:border-primary hover:text-primary hover:bg-white transition duration-300 flex items-center">
+                        <i class="fas fa-paper-plane mr-2"></i> Contact Me
+                    </a>
+                </div>
+                
+                <!-- Social Icons -->
+                <div class="mt-10 flex justify-center md:justify-start space-x-6">
+                    <a href="https://www.facebook.com/md.abdul.momen.848596" target="_blank" class="text-gray-400 hover:text-blue-600 text-2xl transition"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-blue-600 text-2xl transition"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 text-2xl transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-pink-500 text-2xl transition"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="w-full md:w-1/2 flex justify-center relative reveal"> <!-- Added reveal -->
+                <!-- Abstract Background Shapes -->
+                <div class="absolute w-72 h-72 bg-blue-200/50 rounded-full blur-3xl -top-4 -right-4 animate-pulse"></div>
+                <div class="absolute w-72 h-72 bg-purple-200/50 rounded-full blur-3xl bottom-4 left-4 animate-pulse" style="animation-delay: 1s;"></div>
+                
+                <!-- Profile Image (Portrait) -->
+                <div class="relative w-64 h-80 md:w-80 md:h-[30rem] rounded-2xl overflow-hidden border-4 border-white shadow-2xl transform hover:scale-105 transition duration-500">
+                    <img src="abdul123.png" alt="MD Abdul Momen" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal"> <!-- Added reveal -->
+                <h2 class="text-3xl font-bold text-gray-900 inline-block border-b-4 border-primary pb-2">About Me</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 reveal"> <!-- Added reveal -->
+                    <h3 class="text-2xl font-semibold text-gray-800">Creative Mind with Business Insight</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        I am currently studying BBA and pursuing my passion for Video Editing and Graphic Design. I enjoy creating visually appealing content and have a good understanding of business communication.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        My goal is to combine my creative skills with my business knowledge to add value to any project I work on. I am always eager to learn new tools and techniques.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div>
+                            <span class="block text-3xl font-bold text-primary">0</span>
+                            <span class="text-sm text-gray-500">Years Experience</span>
+                        </div>
+                        <div>
+                            <span class="block text-3xl font-bold text-primary">20+</span>
+                            <span class="text-sm text-gray-500">Projects Completed</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-dark p-6 rounded-xl border border-gray-200 shadow-lg reveal"> <!-- Added reveal -->
+                    <h4 class="text-xl font-bold text-gray-900 mb-6">Personal Info</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-envelope text-primary w-8"></i>
+                            <span>mdabdulmomen7k@gmail.com</span>
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-phone text-primary w-8"></i>
+                            <span>01946491141</span>
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-map-marker-alt text-primary w-8"></i>
+                            <span>Satkania, Chittagong</span>
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-globe text-primary w-8"></i>
+                            <span>www.yourwebsite.com</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8">
+                        <a href="my-cv.pdf" download="MD_Abdul_Momen_CV.pdf" class="w-full py-3 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium rounded-lg transition flex items-center justify-center gap-2 cursor-pointer text-center">
+                            <i class="fas fa-download"></i> Download CV
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-dark border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal"> <!-- Added reveal -->
+                <h2 class="text-3xl font-bold text-gray-900 inline-block border-b-4 border-primary pb-2">My Services</h2>
+                <p class="mt-4 text-gray-500">Expert Solutions in Excel & Finance</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Service 1 -->
+                <div class="flex gap-6 p-6 rounded-xl hover:bg-white hover:shadow-md transition duration-300 group reveal"> <!-- Added reveal -->
+                    <div class="flex-shrink-0">
+                        <div class="w-14 h-14 rounded-lg bg-white border border-gray-200 flex items-center justify-center group-hover:border-primary transition duration-300 shadow-sm">
+                            <i class="fas fa-chart-line text-3xl text-blue-500"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Excel Dashboard / Reporting</h3>
+                        <ul class="text-gray-600 text-sm leading-relaxed mb-4 list-disc pl-4 space-y-1">
+                            <li>Chart Creation & Graphs</li>
+                            <li>Pivot Table Analysis</li>
+                            <li>Summary Report Generation</li>
+                            <li>Data Visualization</li>
+                        </ul>
+                        <a href="#contact" class="text-primary text-sm font-medium border-b border-primary pb-1 hover:text-blue-700 hover:border-blue-700 transition">More info</a>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="flex gap-6 p-6 rounded-xl hover:bg-white hover:shadow-md transition duration-300 group reveal"> <!-- Added reveal -->
+                    <div class="flex-shrink-0">
+                        <div class="w-14 h-14 rounded-lg bg-white border border-gray-200 flex items-center justify-center group-hover:border-primary transition duration-300 shadow-sm">
+                            <i class="fas fa-file-invoice-dollar text-3xl text-green-500"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Accounting & Finance</h3>
+                        <ul class="text-gray-600 text-sm leading-relaxed mb-4 list-disc pl-4 space-y-1">
+                            <li>Budget Sheet & Expense Tracker</li>
+                            <li>Salary Sheet Preparation</li>
+                            <li>Profit & Loss Sheet</li>
+                            <li>Bank Reconciliation</li>
+                        </ul>
+                        <a href="#contact" class="text-primary text-sm font-medium border-b border-primary pb-1 hover:text-blue-700 hover:border-blue-700 transition">More info</a>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="flex gap-6 p-6 rounded-xl hover:bg-white hover:shadow-md transition duration-300 group reveal"> <!-- Added reveal -->
+                    <div class="flex-shrink-0">
+                        <div class="w-14 h-14 rounded-lg bg-white border border-gray-200 flex items-center justify-center group-hover:border-primary transition duration-300 shadow-sm">
+                            <i class="fas fa-wand-magic-sparkles text-3xl text-purple-500"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Formulas & Automation</h3>
+                        <ul class="text-gray-600 text-sm leading-relaxed mb-4 list-disc pl-4 space-y-1">
+                            <li>VLOOKUP, HLOOKUP, XLOOKUP</li>
+                            <li>IF, COUNTIF, SUMIF Formulas</li>
+                            <li>CONCATENATE & String Functions</li>
+                            <li>Conditional Formatting Automation</li>
+                        </ul>
+                        <a href="#contact" class="text-primary text-sm font-medium border-b border-primary pb-1 hover:text-blue-700 hover:border-blue-700 transition">More info</a>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="flex gap-6 p-6 rounded-xl hover:bg-white hover:shadow-md transition duration-300 group reveal"> <!-- Added reveal -->
+                    <div class="flex-shrink-0">
+                        <div class="w-14 h-14 rounded-lg bg-white border border-gray-200 flex items-center justify-center group-hover:border-primary transition duration-300 shadow-sm">
+                            <i class="fas fa-boxes-stacked text-3xl text-orange-500"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Inventory Management</h3>
+                        <ul class="text-gray-600 text-sm leading-relaxed mb-4 list-disc pl-4 space-y-1">
+                            <li>Stock In/Out Sheets</li>
+                            <li>Product Tracking System</li>
+                            <li>Barcode-based Entry (Simple)</li>
+                            <li>Inventory Valuation</li>
+                        </ul>
+                        <a href="#contact" class="text-primary text-sm font-medium border-b border-primary pb-1 hover:text-blue-700 hover:border-blue-700 transition">More info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section id="clients" class="py-16 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10 reveal"> <!-- Added reveal -->
+                <h3 class="text-2xl font-bold text-gray-800">Trusted Clients</h3>
+            </div>
+            
+            <div class="flex flex-wrap justify-center items-center gap-10 md:gap-16 opacity-90 reveal"> <!-- Added reveal -->
+                <div class="group flex flex-col items-center hover:scale-110 transition duration-300 cursor-pointer">
+                    <i class="fas fa-building text-4xl text-gray-400 group-hover:text-gray-800 mb-2"></i>
+                    <span class="font-bold text-gray-600 group-hover:text-gray-900">Bashundhara Group</span>
+                </div>
+                <div class="group flex flex-col items-center hover:scale-110 transition duration-300 cursor-pointer">
+                    <i class="fas fa-capsules text-4xl text-gray-400 group-hover:text-green-600 mb-2"></i>
+                    <span class="font-bold text-gray-600 group-hover:text-gray-900">Pharmacy</span>
+                </div>
+                <div class="group flex flex-col items-center hover:scale-110 transition duration-300 cursor-pointer">
+                    <i class="fas fa-truck-fast text-4xl text-gray-400 group-hover:text-blue-600 mb-2"></i>
+                    <span class="font-bold text-gray-600 group-hover:text-gray-900 text-center">Local Distributor</span>
+                </div>
+                <div class="group flex flex-col items-center hover:scale-110 transition duration-300 cursor-pointer">
+                    <i class="fas fa-money-bill-wave text-4xl text-gray-400 group-hover:text-pink-600 mb-2"></i>
+                    <span class="font-bold text-gray-600 group-hover:text-pink-600">bKash</span>
+                </div>
+                <div class="group flex flex-col items-center hover:scale-110 transition duration-300 cursor-pointer">
+                    <i class="fas fa-wallet text-4xl text-gray-400 group-hover:text-orange-600 mb-2"></i>
+                    <span class="font-bold text-gray-600 group-hover:text-orange-600">Nagad</span>
+                </div>
+                <div class="group flex flex-col items-center hover:scale-110 transition duration-300 cursor-pointer">
+                    <i class="fas fa-industry text-4xl text-gray-400 group-hover:text-gray-800 mb-2"></i>
+                    <span class="font-bold text-gray-600 group-hover:text-gray-900">HRC Group</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal"> <!-- Added reveal -->
+                <h2 class="text-3xl font-bold text-gray-900 inline-block border-b-4 border-primary pb-2">My Skills</h2>
+                <p class="mt-4 text-gray-500">Software, Soft Skills & Academics</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Creative & Design (10%) -->
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg reveal"> <!-- Added reveal -->
+                    <h3 class="text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-2"><i class="fas fa-video text-primary mr-2"></i> Creative & Design</h3>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-base font-medium text-gray-700"><i class="fas fa-film text-purple-500 mr-2"></i> Adobe Premiere Pro</span>
+                            <span class="skill-percentage text-sm font-medium text-primary" data-target="10">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="skill-progress bg-primary h-2.5 rounded-full shadow-md transition-all duration-[2500ms] ease-out" style="width: 0%" data-width="10%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-base font-medium text-gray-700"><i class="fas fa-image text-blue-500 mr-2"></i> Adobe Photoshop</span>
+                            <span class="skill-percentage text-sm font-medium text-primary" data-target="10">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="skill-progress bg-primary h-2.5 rounded-full shadow-md transition-all duration-[2500ms] ease-out" style="width: 0%" data-width="10%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-base font-medium text-gray-700"><i class="fas fa-pen-nib text-orange-500 mr-2"></i> Adobe Illustrator</span>
+                            <span class="skill-percentage text-sm font-medium text-primary" data-target="10">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="skill-progress bg-primary h-2.5 rounded-full shadow-md transition-all duration-[2500ms] ease-out" style="width: 0%" data-width="10%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data & Technical Skills -->
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg reveal"> <!-- Added reveal -->
+                    <h3 class="text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-2"><i class="fas fa-database text-primary mr-2"></i> Data & Technical Skills</h3>
+
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-base font-medium text-gray-700"><i class="fas fa-file-excel text-green-600 mr-2"></i> Microsoft Excel</span>
+                            <span class="skill-percentage text-sm font-medium text-primary" data-target="90">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="skill-progress bg-primary h-2.5 rounded-full shadow-md transition-all duration-[2500ms] ease-out" style="width: 0%" data-width="90%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-base font-medium text-gray-700"><i class="fas fa-chart-simple text-yellow-500 mr-2"></i> Power BI</span>
+                            <span class="skill-percentage text-sm font-medium text-primary" data-target="75">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="skill-progress bg-primary h-2.5 rounded-full shadow-md transition-all duration-[2500ms] ease-out" style="width: 0%" data-width="75%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-base font-medium text-gray-700"><i class="fas fa-laptop text-gray-600 mr-2"></i> Basic Computer Skills</span>
+                            <span class="skill-percentage text-sm font-medium text-primary" data-target="95">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="skill-progress bg-primary h-2.5 rounded-full shadow-md transition-all duration-[2500ms] ease-out" style="width: 0%" data-width="95%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Academic Skills -->
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg md:col-span-2 lg:col-span-1 reveal"> <!-- Added reveal -->
+                    <h3 class="text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-2"><i class="fas fa-graduation-cap text-primary mr-2"></i> Academic Skills</h3>
+
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-base font-medium text-gray-700"><i class="fas fa-calculator text-indigo-500 mr-2"></i> Accounting Basics</span>
+                            <span class="skill-percentage text-sm font-medium text-primary" data-target="95">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="skill-progress bg-primary h-2.5 rounded-full shadow-md transition-all duration-[2500ms] ease-out" style="width: 0%" data-width="95%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-base font-medium text-gray-700"><i class="fas fa-balance-scale text-teal-500 mr-2"></i> Business Principles</span>
+                            <span class="skill-percentage text-sm font-medium text-primary" data-target="75">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="skill-progress bg-primary h-2.5 rounded-full shadow-md transition-all duration-[2500ms] ease-out" style="width: 0%" data-width="75%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-base font-medium text-gray-700"><i class="fas fa-clock text-rose-500 mr-2"></i> Time Management</span>
+                            <span class="skill-percentage text-sm font-medium text-primary" data-target="70">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="skill-progress bg-primary h-2.5 rounded-full shadow-md transition-all duration-[2500ms] ease-out" style="width: 0%" data-width="70%"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal"> <!-- Added reveal -->
+                <h2 class="text-3xl font-bold text-gray-900 inline-block border-b-4 border-primary pb-2">My Experience</h2>
+                <p class="mt-4 text-gray-500">My academic & professional journey</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 relative">
+                <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-200"></div>
+
+                <div class="hidden md:block"></div>
+                
+                <div class="relative md:text-left md:pl-10 reveal"> <!-- Added reveal -->
+                    <div class="hidden md:block absolute top-0 left-[-2.85rem] w-6 h-6 bg-yellow-500 rounded-full border-4 border-white z-10"></div>
+                    <span class="text-yellow-600 font-semibold text-sm tracking-wider uppercase mb-2 block">2025 - Present</span>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1">BBA (Accounting)</h3>
+                    <h4 class="text-lg font-medium text-gray-700 mb-4">Bandarban Govt. College | National University</h4>
+                    <p class="text-gray-600 leading-relaxed">
+                        Pursuing higher education in business and finance basics. Developing a strong foundation in accounting principles and management.
+                    </p>
+                </div>
+
+                <div class="relative md:text-right md:pr-10 reveal"> <!-- Added reveal -->
+                    <div class="hidden md:block absolute top-0 right-[-2.85rem] w-6 h-6 bg-primary rounded-full border-4 border-white z-10"></div>
+                    <span class="text-primary font-semibold text-sm tracking-wider uppercase mb-2 block">Part-Time Experience</span>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1">LPG Gas Shop Assistant</h3>
+                    <h4 class="text-lg font-medium text-gray-700 mb-4">Delikaz Gas Shop, Chittagong</h4>
+                    <p class="text-gray-600 leading-relaxed mb-2">
+                        Managed customer service, cash handling, and product delivery. Gained practical experience in retail management.
+                    </p>
+                    <p class="text-sm text-gray-500 italic">Workload: 2 days/week, 13-14 hrs/day.</p>
+                </div>
+                <div class="hidden md:block"></div>
+
+                <div class="hidden md:block"></div>
+                <div class="relative md:text-left md:pl-10 reveal"> <!-- Added reveal -->
+                    <div class="hidden md:block absolute top-0 left-[-2.85rem] w-6 h-6 bg-gray-500 rounded-full border-4 border-white z-10"></div>
+                    <span class="text-gray-500 font-semibold text-sm tracking-wider uppercase mb-2 block">Foundation</span>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1">SSC & HSC</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Completed secondary and higher secondary education with a focus on building academic discipline and foundational knowledge.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal"> <!-- Added reveal -->
+                <h2 class="text-3xl font-bold text-gray-900 inline-block border-b-4 border-primary pb-2">Recent Projects</h2>
+                <p class="mt-4 text-gray-500">Check out my latest Data & Excel work</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 hover:-translate-y-2 transition duration-300 reveal"> <!-- Added reveal -->
+                    <div class="h-48 bg-gray-200 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-100 to-gray-100 flex items-center justify-center">
+                             <i class="fas fa-chart-pie text-5xl text-blue-400"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center gap-4">
+                            <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-900 hover:bg-gray-100"><i class="fas fa-eye"></i></a>
+                            <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-900 hover:bg-gray-100"><i class="fas fa-link"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Interactive Sales Dashboard</h3>
+                        <p class="text-gray-600 text-sm mb-4">A dynamic Excel dashboard visualizing monthly sales performance using Pivot Tables, Slicers, and advanced charts for data-driven decisions.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-100 text-xs text-primary rounded-full">Excel</span>
+                            <span class="px-3 py-1 bg-gray-100 text-xs text-primary rounded-full">Data Analysis</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 hover:-translate-y-2 transition duration-300 reveal"> <!-- Added reveal -->
+                    <div class="h-48 bg-gray-200 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-br from-orange-100 to-gray-100 flex items-center justify-center">
+                             <i class="fas fa-boxes-packing text-5xl text-orange-400"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center gap-4">
+                            <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-900 hover:bg-gray-100"><i class="fas fa-eye"></i></a>
+                            <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-900 hover:bg-gray-100"><i class="fas fa-link"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Smart Inventory Tracker</h3>
+                        <p class="text-gray-600 text-sm mb-4">Automated inventory management system with stock-in/out tracking, auto-calculating reorder points, and supplier management features.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-100 text-xs text-primary rounded-full">Automation</span>
+                            <span class="px-3 py-1 bg-gray-100 text-xs text-primary rounded-full">Formulas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 hover:-translate-y-2 transition duration-300 reveal"> <!-- Added reveal -->
+                    <div class="h-48 bg-gray-200 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-br from-green-100 to-gray-100 flex items-center justify-center">
+                             <i class="fas fa-file-invoice-dollar text-5xl text-green-400"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center gap-4">
+                            <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-900 hover:bg-gray-100"><i class="fas fa-eye"></i></a>
+                            <a href="#" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-900 hover:bg-gray-100"><i class="fas fa-link"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Financial Reporting Suite</h3>
+                        <p class="text-gray-600 text-sm mb-4">Comprehensive financial tool generating automated Profit & Loss statements, Balance Sheets, and Cash Flow reports with error checks.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-100 text-xs text-primary rounded-full">Accounting</span>
+                            <span class="px-3 py-1 bg-gray-100 text-xs text-primary rounded-full">Reporting</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10 reveal"> <!-- Added reveal -->
+                <h2 class="text-3xl font-bold text-gray-900 inline-block border-b-4 border-primary pb-2">Portfolio Gallery</h2>
+            </div>
+            
+            <div class="flex justify-center flex-wrap gap-6 mb-12 reveal"> <!-- Added reveal -->
+                <button class="filter-btn active text-gray-500 hover:text-primary font-medium transition duration-300" onclick="filterGallery('all', this)">All</button>
+                <button class="filter-btn text-gray-500 hover:text-primary font-medium transition duration-300" onclick="filterGallery('dashboard', this)">Dashboards</button>
+                <button class="filter-btn text-gray-500 hover:text-primary font-medium transition duration-300" onclick="filterGallery('automation', this)">Automation</button>
+                <button class="filter-btn text-gray-500 hover:text-primary font-medium transition duration-300" onclick="filterGallery('finance', this)">Finance Sheets</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Gallery Items -->
+                <div class="gallery-item dashboard group relative overflow-hidden rounded-lg aspect-video bg-gray-200 cursor-pointer reveal"> <!-- Added reveal -->
+                    <img src="https://via.placeholder.com/600x400/e2e8f0/3b82f6?text=Sales+Dashboard" alt="Dashboard" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <h3 class="text-white font-bold text-xl">Sales Analytics</h3>
+                    </div>
+                </div>
+
+                <div class="gallery-item automation group relative overflow-hidden rounded-lg aspect-video bg-gray-200 cursor-pointer reveal"> <!-- Added reveal -->
+                    <img src="https://via.placeholder.com/600x400/e2e8f0/f59e0b?text=Stock+Tracker" alt="Automation" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <h3 class="text-white font-bold text-xl">Auto Stock System</h3>
+                    </div>
+                </div>
+
+                <div class="gallery-item finance group relative overflow-hidden rounded-lg aspect-video bg-gray-200 cursor-pointer reveal"> <!-- Added reveal -->
+                    <img src="https://via.placeholder.com/600x400/e2e8f0/10b981?text=Budget+Planner" alt="Finance" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <h3 class="text-white font-bold text-xl">Monthly Budget</h3>
+                    </div>
+                </div>
+
+                <div class="gallery-item dashboard group relative overflow-hidden rounded-lg aspect-video bg-gray-200 cursor-pointer reveal"> <!-- Added reveal -->
+                    <img src="https://via.placeholder.com/600x400/e2e8f0/8b5cf6?text=HR+Dashboard" alt="Dashboard" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <h3 class="text-white font-bold text-xl">Employee Report</h3>
+                    </div>
+                </div>
+
+                <div class="gallery-item automation group relative overflow-hidden rounded-lg aspect-video bg-gray-200 cursor-pointer reveal"> <!-- Added reveal -->
+                    <img src="https://via.placeholder.com/600x400/e2e8f0/ef4444?text=Invoice+Gen" alt="Automation" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <h3 class="text-white font-bold text-xl">Auto Invoice</h3>
+                    </div>
+                </div>
+
+                <div class="gallery-item finance group relative overflow-hidden rounded-lg aspect-video bg-gray-200 cursor-pointer reveal"> <!-- Added reveal -->
+                    <img src="https://via.placeholder.com/600x400/e2e8f0/ec4899?text=Tax+Calculator" alt="Finance" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <h3 class="text-white font-bold text-xl">Tax Sheet</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-dark">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal"> <!-- Added reveal -->
+                <h2 class="text-3xl font-bold text-gray-900 inline-block border-b-4 border-primary pb-2">Contact Me</h2>
+                <p class="mt-4 text-gray-500">Have a project in mind? Let's discuss.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 reveal"> <!-- Added reveal -->
+                <form action="https://formsubmit.co/mdabdulmomen7k@gmail.com" method="POST" class="space-y-6">
+                    <input type="hidden" name="_captcha" value="true">
+                    <input type="text" name="_honey" style="display:none">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_subject" value="New Portfolio Contact Message!">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 mb-2">Name</label>
+                            <input type="text" name="name" placeholder="Your Name" required class="w-full px-4 py-3 bg-dark border border-gray-300 rounded-lg focus:outline-none focus:border-primary text-gray-900 transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 mb-2">Email</label>
+                            <input type="email" name="email" placeholder="Your Email" required class="w-full px-4 py-3 bg-dark border border-gray-300 rounded-lg focus:outline-none focus:border-primary text-gray-900 transition">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-600 mb-2">Subject</label>
+                        <input type="text" name="subject" placeholder="Project Subject" required class="w-full px-4 py-3 bg-dark border border-gray-300 rounded-lg focus:outline-none focus:border-primary text-gray-900 transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-600 mb-2">Message</label>
+                        <textarea name="message" rows="4" placeholder="Your Message..." required class="w-full px-4 py-3 bg-dark border border-gray-300 rounded-lg focus:outline-none focus:border-primary text-gray-900 transition"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-primary text-white font-bold rounded-lg hover:bg-blue-600 transition shadow-lg shadow-blue-500/30">
+                        Send Message <i class="fas fa-paper-plane ml-2"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-500">© 2025 MD Abdul Momen. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Typing Effect
+        const textElement = document.getElementById('typing-text');
+        const phrases = ["BBA Student", "Tech Learner", "Future Brand Builder"];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typeSpeed = 100;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                typeSpeed = 50;
+            } else {
+                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                typeSpeed = 100;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                typeSpeed = 2000;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        document.addEventListener('DOMContentLoaded', type);
+
+        // Mobile Menu
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            const isClosed = mobileMenu.style.transform === 'translateY(-150%)' || mobileMenu.classList.contains('-translate-y-[150%]');
+            
+            if (isClosed) {
+                mobileMenu.classList.remove('-translate-y-[150%]');
+                mobileMenu.style.transform = 'translateY(0)';
+            } else {
+                mobileMenu.style.transform = 'translateY(-150%)';
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.style.transform = 'translateY(-150%)';
+            });
+        });
+
+        // Skills Animation
+        const skillSection = document.getElementById('skills');
+        const progressBars = document.querySelectorAll('.skill-progress');
+        const percentageTexts = document.querySelectorAll('.skill-percentage');
+
+        function showProgress() {
+            progressBars.forEach(progressBar => {
+                const value = progressBar.getAttribute('data-width');
+                progressBar.style.width = value;
+            });
+
+            percentageTexts.forEach(text => {
+                const target = +text.getAttribute('data-target');
+                const duration = 2500;
+                const startTime = performance.now();
+
+                function update(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const currentVal = Math.floor(progress * target);
+                    text.innerText = currentVal + "%";
+
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    } else {
+                        text.innerText = target + "%";
+                    }
+                }
+                requestAnimationFrame(update);
+            });
+        }
+
+        const skillsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    showProgress();
+                    skillsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        if(skillSection) {
+            skillsObserver.observe(skillSection);
+        }
+
+        // Gallery Filter
+        function filterGallery(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('active');
+                b.classList.replace('text-primary', 'text-gray-500');
+            });
+            btn.classList.add('active');
+            btn.classList.replace('text-gray-500', 'text-primary');
+
+            const items = document.querySelectorAll('.gallery-item');
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'block';
+                    item.classList.add('animate-fade-in');
+                } else {
+                    item.style.display = 'none';
+                    item.classList.remove('animate-fade-in');
+                }
+            });
+        }
+
+        // Active Link Highlight
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(li => {
+                li.classList.remove('active');
+                if (li.getAttribute('href').includes(current)) {
+                    li.classList.add('active');
+                }
+            });
+        });
+
+        // Scroll Reveal Animation (Added)
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: Stop observing once revealed
+                    // revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1, // Reveal when 10% of element is visible
+            rootMargin: "0px 0px -50px 0px" // Trigger slightly before bottom
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+    </script>
+</body>
+</html>
