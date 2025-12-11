@@ -31,7 +31,7 @@
         body {
             background-color: #F2F2F0;
             color: #1F2937;
-            overflow-x: hidden; /* Prevent horizontal scroll from animation offset */
+            overflow-x: hidden;
         }
         
         /* Cursor animation */
@@ -94,16 +94,16 @@
             border-bottom: 2px solid #3B82F6;
         }
 
-        /* --- Scroll Reveal Animation Styles --- */
+        /* --- Scroll Reveal Animation Styles (Restored) --- */
         .reveal {
-            opacity: 0;
-            transform: translateY(50px) scale(0.95); /* Start slightly down and smaller */
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); /* Smooth easing */
+            opacity: 0; /* শুরুতে অদৃশ্য থাকবে */
+            transform: translateY(30px); /* একটু নিচে থাকবে */
+            transition: all 1s ease-out; /* ১ সেকেন্ড ধরে ভেসে উঠবে */
         }
 
         .reveal.active {
-            opacity: 1;
-            transform: translateY(0) scale(1); /* End at normal position and size */
+            opacity: 1; /* দৃশ্যমান হবে */
+            transform: translateY(0); /* সঠিক জায়গায় আসবে */
         }
     </style>
 </head>
@@ -157,7 +157,7 @@
     <!-- Hero Section -->
     <section id="home" class="min-h-screen flex items-center justify-center pt-16 bg-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse md:flex-row items-center">
-            <div class="w-full md:w-1/2 text-center md:text-left mt-10 md:mt-0 reveal"> <!-- Added reveal -->
+            <div class="w-full md:w-1/2 text-center md:text-left mt-10 md:mt-0 reveal">
                 <p class="text-primary font-medium mb-2 text-lg">Hello, I'm</p>
                 <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-4">MD Abdul Momen</h1>
                 <h2 class="text-2xl md:text-3xl text-gray-500 mb-8 flex justify-center md:justify-start">
@@ -192,14 +192,14 @@
                 </div>
             </div>
             
-            <div class="w-full md:w-1/2 flex justify-center relative reveal"> <!-- Added reveal -->
+            <div class="w-full md:w-1/2 flex justify-center relative reveal">
                 <!-- Abstract Background Shapes -->
                 <div class="absolute w-72 h-72 bg-blue-200/50 rounded-full blur-3xl -top-4 -right-4 animate-pulse"></div>
                 <div class="absolute w-72 h-72 bg-purple-200/50 rounded-full blur-3xl bottom-4 left-4 animate-pulse" style="animation-delay: 1s;"></div>
                 
                 <!-- Profile Image (Portrait) -->
                 <div class="relative w-64 h-80 md:w-80 md:h-[30rem] rounded-2xl overflow-hidden border-4 border-white shadow-2xl transform hover:scale-105 transition duration-500">
-                    <img src="abdul123.png" alt="MD Abdul Momen" class="w-full h-full object-cover">
+                    <img src="momenphoto.jpg" alt="MD Abdul Momen" class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
@@ -208,12 +208,12 @@
     <!-- About Section -->
     <section id="about" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal"> <!-- Added reveal -->
+            <div class="text-center mb-16 reveal">
                 <h2 class="text-3xl font-bold text-gray-900 inline-block border-b-4 border-primary pb-2">About Me</h2>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6 reveal"> <!-- Added reveal -->
+                <div class="space-y-6 reveal">
                     <h3 class="text-2xl font-semibold text-gray-800">Creative Mind with Business Insight</h3>
                     <p class="text-gray-600 leading-relaxed">
                         I am currently studying BBA and pursuing my passion for Video Editing and Graphic Design. I enjoy creating visually appealing content and have a good understanding of business communication.
@@ -234,7 +234,7 @@
                     </div>
                 </div>
                 
-                <div class="bg-dark p-6 rounded-xl border border-gray-200 shadow-lg reveal"> <!-- Added reveal -->
+                <div class="bg-dark p-6 rounded-xl border border-gray-200 shadow-lg reveal">
                     <h4 class="text-xl font-bold text-gray-900 mb-6">Personal Info</h4>
                     <ul class="space-y-4">
                         <li class="flex items-center text-gray-600">
@@ -267,14 +267,14 @@
     <!-- Services Section -->
     <section id="services" class="py-20 bg-dark border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal"> <!-- Added reveal -->
+            <div class="text-center mb-16 reveal">
                 <h2 class="text-3xl font-bold text-gray-900 inline-block border-b-4 border-primary pb-2">My Services</h2>
                 <p class="mt-4 text-gray-500">Expert Solutions in Excel & Finance</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <!-- Service 1 -->
-                <div class="flex gap-6 p-6 rounded-xl hover:bg-white hover:shadow-md transition duration-300 group reveal"> <!-- Added reveal -->
+                <div class="flex gap-6 p-6 rounded-xl hover:bg-white hover:shadow-md transition duration-300 group reveal">
                     <div class="flex-shrink-0">
                         <div class="w-14 h-14 rounded-lg bg-white border border-gray-200 flex items-center justify-center group-hover:border-primary transition duration-300 shadow-sm">
                             <i class="fas fa-chart-line text-3xl text-blue-500"></i>
@@ -293,7 +293,7 @@
                 </div>
 
                 <!-- Service 2 -->
-                <div class="flex gap-6 p-6 rounded-xl hover:bg-white hover:shadow-md transition duration-300 group reveal"> <!-- Added reveal -->
+                <div class="flex gap-6 p-6 rounded-xl hover:bg-white hover:shadow-md transition duration-300 group reveal">
                     <div class="flex-shrink-0">
                         <div class="w-14 h-14 rounded-lg bg-white border border-gray-200 flex items-center justify-center group-hover:border-primary transition duration-300 shadow-sm">
                             <i class="fas fa-file-invoice-dollar text-3xl text-green-500"></i>
@@ -312,7 +312,7 @@
                 </div>
 
                 <!-- Service 3 -->
-                <div class="flex gap-6 p-6 rounded-xl hover:bg-white hover:shadow-md transition duration-300 group reveal"> <!-- Added reveal -->
+                <div class="flex gap-6 p-6 rounded-xl hover:bg-white hover:shadow-md transition duration-300 group reveal">
                     <div class="flex-shrink-0">
                         <div class="w-14 h-14 rounded-lg bg-white border border-gray-200 flex items-center justify-center group-hover:border-primary transition duration-300 shadow-sm">
                             <i class="fas fa-wand-magic-sparkles text-3xl text-purple-500"></i>
@@ -331,7 +331,7 @@
                 </div>
 
                 <!-- Service 4 -->
-                <div class="flex gap-6 p-6 rounded-xl hover:bg-white hover:shadow-md transition duration-300 group reveal"> <!-- Added reveal -->
+                <div class="flex gap-6 p-6 rounded-xl hover:bg-white hover:shadow-md transition duration-300 group reveal">
                     <div class="flex-shrink-0">
                         <div class="w-14 h-14 rounded-lg bg-white border border-gray-200 flex items-center justify-center group-hover:border-primary transition duration-300 shadow-sm">
                             <i class="fas fa-boxes-stacked text-3xl text-orange-500"></i>
@@ -355,11 +355,11 @@
     <!-- Clients Section -->
     <section id="clients" class="py-16 bg-white border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-10 reveal"> <!-- Added reveal -->
+            <div class="text-center mb-10 reveal">
                 <h3 class="text-2xl font-bold text-gray-800">Trusted Clients</h3>
             </div>
             
-            <div class="flex flex-wrap justify-center items-center gap-10 md:gap-16 opacity-90 reveal"> <!-- Added reveal -->
+            <div class="flex flex-wrap justify-center items-center gap-10 md:gap-16 opacity-90 reveal">
                 <div class="group flex flex-col items-center hover:scale-110 transition duration-300 cursor-pointer">
                     <i class="fas fa-building text-4xl text-gray-400 group-hover:text-gray-800 mb-2"></i>
                     <span class="font-bold text-gray-600 group-hover:text-gray-900">Bashundhara Group</span>
@@ -391,7 +391,7 @@
     <!-- Skills Section -->
     <section id="skills" class="py-20 bg-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal"> <!-- Added reveal -->
+            <div class="text-center mb-16 reveal">
                 <h2 class="text-3xl font-bold text-gray-900 inline-block border-b-4 border-primary pb-2">My Skills</h2>
                 <p class="mt-4 text-gray-500">Software, Soft Skills & Academics</p>
             </div>
@@ -399,7 +399,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
                 <!-- Creative & Design (10%) -->
-                <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg reveal"> <!-- Added reveal -->
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg reveal">
                     <h3 class="text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-2"><i class="fas fa-video text-primary mr-2"></i> Creative & Design</h3>
                     
                     <div class="mb-6">
@@ -432,7 +432,7 @@
                 </div>
 
                 <!-- Data & Technical Skills -->
-                <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg reveal"> <!-- Added reveal -->
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg reveal">
                     <h3 class="text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-2"><i class="fas fa-database text-primary mr-2"></i> Data & Technical Skills</h3>
 
                     <div class="mb-6">
@@ -465,7 +465,7 @@
                 </div>
 
                 <!-- Academic Skills -->
-                <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg md:col-span-2 lg:col-span-1 reveal"> <!-- Added reveal -->
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg md:col-span-2 lg:col-span-1 reveal">
                     <h3 class="text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-2"><i class="fas fa-graduation-cap text-primary mr-2"></i> Academic Skills</h3>
 
                     <div class="mb-6">
@@ -504,7 +504,7 @@
     <!-- Experience Section -->
     <section id="experience" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal"> <!-- Added reveal -->
+            <div class="text-center mb-16 reveal">
                 <h2 class="text-3xl font-bold text-gray-900 inline-block border-b-4 border-primary pb-2">My Experience</h2>
                 <p class="mt-4 text-gray-500">My academic & professional journey</p>
             </div>
@@ -514,7 +514,7 @@
 
                 <div class="hidden md:block"></div>
                 
-                <div class="relative md:text-left md:pl-10 reveal"> <!-- Added reveal -->
+                <div class="relative md:text-left md:pl-10 reveal">
                     <div class="hidden md:block absolute top-0 left-[-2.85rem] w-6 h-6 bg-yellow-500 rounded-full border-4 border-white z-10"></div>
                     <span class="text-yellow-600 font-semibold text-sm tracking-wider uppercase mb-2 block">2025 - Present</span>
                     <h3 class="text-2xl font-bold text-gray-900 mb-1">BBA (Accounting)</h3>
@@ -524,7 +524,7 @@
                     </p>
                 </div>
 
-                <div class="relative md:text-right md:pr-10 reveal"> <!-- Added reveal -->
+                <div class="relative md:text-right md:pr-10 reveal">
                     <div class="hidden md:block absolute top-0 right-[-2.85rem] w-6 h-6 bg-primary rounded-full border-4 border-white z-10"></div>
                     <span class="text-primary font-semibold text-sm tracking-wider uppercase mb-2 block">Part-Time Experience</span>
                     <h3 class="text-2xl font-bold text-gray-900 mb-1">LPG Gas Shop Assistant</h3>
@@ -537,7 +537,7 @@
                 <div class="hidden md:block"></div>
 
                 <div class="hidden md:block"></div>
-                <div class="relative md:text-left md:pl-10 reveal"> <!-- Added reveal -->
+                <div class="relative md:text-left md:pl-10 reveal">
                     <div class="hidden md:block absolute top-0 left-[-2.85rem] w-6 h-6 bg-gray-500 rounded-full border-4 border-white z-10"></div>
                     <span class="text-gray-500 font-semibold text-sm tracking-wider uppercase mb-2 block">Foundation</span>
                     <h3 class="text-2xl font-bold text-gray-900 mb-1">SSC & HSC</h3>
@@ -552,14 +552,14 @@
     <!-- Projects Section -->
     <section id="projects" class="py-20 bg-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal"> <!-- Added reveal -->
+            <div class="text-center mb-16 reveal">
                 <h2 class="text-3xl font-bold text-gray-900 inline-block border-b-4 border-primary pb-2">Recent Projects</h2>
                 <p class="mt-4 text-gray-500">Check out my latest Data & Excel work</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Project 1 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 hover:-translate-y-2 transition duration-300 reveal"> <!-- Added reveal -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 hover:-translate-y-2 transition duration-300 reveal">
                     <div class="h-48 bg-gray-200 relative overflow-hidden group">
                         <div class="absolute inset-0 bg-gradient-to-br from-blue-100 to-gray-100 flex items-center justify-center">
                              <i class="fas fa-chart-pie text-5xl text-blue-400"></i>
@@ -580,7 +580,7 @@
                 </div>
 
                 <!-- Project 2 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 hover:-translate-y-2 transition duration-300 reveal"> <!-- Added reveal -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 hover:-translate-y-2 transition duration-300 reveal">
                     <div class="h-48 bg-gray-200 relative overflow-hidden group">
                         <div class="absolute inset-0 bg-gradient-to-br from-orange-100 to-gray-100 flex items-center justify-center">
                              <i class="fas fa-boxes-packing text-5xl text-orange-400"></i>
@@ -601,7 +601,7 @@
                 </div>
 
                 <!-- Project 3 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 hover:-translate-y-2 transition duration-300 reveal"> <!-- Added reveal -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 hover:-translate-y-2 transition duration-300 reveal">
                     <div class="h-48 bg-gray-200 relative overflow-hidden group">
                         <div class="absolute inset-0 bg-gradient-to-br from-green-100 to-gray-100 flex items-center justify-center">
                              <i class="fas fa-file-invoice-dollar text-5xl text-green-400"></i>
@@ -627,11 +627,11 @@
     <!-- Gallery Section -->
     <section id="gallery" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-10 reveal"> <!-- Added reveal -->
+            <div class="text-center mb-10 reveal">
                 <h2 class="text-3xl font-bold text-gray-900 inline-block border-b-4 border-primary pb-2">Portfolio Gallery</h2>
             </div>
             
-            <div class="flex justify-center flex-wrap gap-6 mb-12 reveal"> <!-- Added reveal -->
+            <div class="flex justify-center flex-wrap gap-6 mb-12 reveal">
                 <button class="filter-btn active text-gray-500 hover:text-primary font-medium transition duration-300" onclick="filterGallery('all', this)">All</button>
                 <button class="filter-btn text-gray-500 hover:text-primary font-medium transition duration-300" onclick="filterGallery('dashboard', this)">Dashboards</button>
                 <button class="filter-btn text-gray-500 hover:text-primary font-medium transition duration-300" onclick="filterGallery('automation', this)">Automation</button>
@@ -640,42 +640,42 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Gallery Items -->
-                <div class="gallery-item dashboard group relative overflow-hidden rounded-lg aspect-video bg-gray-200 cursor-pointer reveal"> <!-- Added reveal -->
+                <div class="gallery-item dashboard group relative overflow-hidden rounded-lg aspect-video bg-gray-200 cursor-pointer reveal">
                     <img src="https://via.placeholder.com/600x400/e2e8f0/3b82f6?text=Sales+Dashboard" alt="Dashboard" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
                         <h3 class="text-white font-bold text-xl">Sales Analytics</h3>
                     </div>
                 </div>
 
-                <div class="gallery-item automation group relative overflow-hidden rounded-lg aspect-video bg-gray-200 cursor-pointer reveal"> <!-- Added reveal -->
+                <div class="gallery-item automation group relative overflow-hidden rounded-lg aspect-video bg-gray-200 cursor-pointer reveal">
                     <img src="https://via.placeholder.com/600x400/e2e8f0/f59e0b?text=Stock+Tracker" alt="Automation" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
                         <h3 class="text-white font-bold text-xl">Auto Stock System</h3>
                     </div>
                 </div>
 
-                <div class="gallery-item finance group relative overflow-hidden rounded-lg aspect-video bg-gray-200 cursor-pointer reveal"> <!-- Added reveal -->
+                <div class="gallery-item finance group relative overflow-hidden rounded-lg aspect-video bg-gray-200 cursor-pointer reveal">
                     <img src="https://via.placeholder.com/600x400/e2e8f0/10b981?text=Budget+Planner" alt="Finance" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
                         <h3 class="text-white font-bold text-xl">Monthly Budget</h3>
                     </div>
                 </div>
 
-                <div class="gallery-item dashboard group relative overflow-hidden rounded-lg aspect-video bg-gray-200 cursor-pointer reveal"> <!-- Added reveal -->
+                <div class="gallery-item dashboard group relative overflow-hidden rounded-lg aspect-video bg-gray-200 cursor-pointer reveal">
                     <img src="https://via.placeholder.com/600x400/e2e8f0/8b5cf6?text=HR+Dashboard" alt="Dashboard" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
                         <h3 class="text-white font-bold text-xl">Employee Report</h3>
                     </div>
                 </div>
 
-                <div class="gallery-item automation group relative overflow-hidden rounded-lg aspect-video bg-gray-200 cursor-pointer reveal"> <!-- Added reveal -->
+                <div class="gallery-item automation group relative overflow-hidden rounded-lg aspect-video bg-gray-200 cursor-pointer reveal">
                     <img src="https://via.placeholder.com/600x400/e2e8f0/ef4444?text=Invoice+Gen" alt="Automation" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
                         <h3 class="text-white font-bold text-xl">Auto Invoice</h3>
                     </div>
                 </div>
 
-                <div class="gallery-item finance group relative overflow-hidden rounded-lg aspect-video bg-gray-200 cursor-pointer reveal"> <!-- Added reveal -->
+                <div class="gallery-item finance group relative overflow-hidden rounded-lg aspect-video bg-gray-200 cursor-pointer reveal">
                     <img src="https://via.placeholder.com/600x400/e2e8f0/ec4899?text=Tax+Calculator" alt="Finance" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
                         <h3 class="text-white font-bold text-xl">Tax Sheet</h3>
@@ -688,12 +688,12 @@
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-dark">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal"> <!-- Added reveal -->
+            <div class="text-center mb-16 reveal">
                 <h2 class="text-3xl font-bold text-gray-900 inline-block border-b-4 border-primary pb-2">Contact Me</h2>
                 <p class="mt-4 text-gray-500">Have a project in mind? Let's discuss.</p>
             </div>
 
-            <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 reveal"> <!-- Added reveal -->
+            <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 reveal">
                 <form action="https://formsubmit.co/mdabdulmomen7k@gmail.com" method="POST" class="space-y-6">
                     <input type="hidden" name="_captcha" value="true">
                     <input type="text" name="_honey" style="display:none">
@@ -729,7 +729,19 @@
     <!-- Footer -->
     <footer class="bg-white border-t border-gray-200 py-8">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-gray-500">© 2025 MD Abdul Momen. All rights reserved.</p>
+            <p class="text-gray-500 mb-4">© 2025 MD Abdul Momen. All rights reserved.</p>
+            
+            <!-- Visitor Counter Section (Clean Text Style) -->
+            <div class="flex justify-center items-center gap-2 px-4 py-2 bg-gray-50 rounded-full inline-flex border border-gray-200 shadow-sm mx-auto w-fit">
+                <span class="flex items-center gap-2 text-sm text-gray-500 font-medium">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    Total Visits:
+                </span>
+                <span id="visitor-count" class="text-primary font-bold text-lg font-mono">Loading...</span>
+            </div>
         </div>
     </footer>
 
@@ -879,23 +891,39 @@
             });
         });
 
-        // Scroll Reveal Animation (Added)
+        // Scroll Reveal Animation (Restored)
         const revealElements = document.querySelectorAll('.reveal');
 
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    // Optional: Stop observing once revealed
-                    // revealObserver.unobserve(entry.target);
                 }
             });
         }, {
-            threshold: 0.1, // Reveal when 10% of element is visible
-            rootMargin: "0px 0px -50px 0px" // Trigger slightly before bottom
+            threshold: 0.1, 
+            rootMargin: "0px 0px -50px 0px"
         });
 
         revealElements.forEach(el => revealObserver.observe(el));
+
+        // Visitor Counter Logic (Start from 1)
+        function updateVisitorCount() {
+            const counterElement = document.getElementById('visitor-count');
+            
+            let count = localStorage.getItem('page_views');
+            
+            if (!count) {
+                count = 1; // Start from 1
+            } else {
+                count = parseInt(count) + 1;
+            }
+            localStorage.setItem('page_views', count);
+            
+            counterElement.innerText = count;
+        }
+        
+        document.addEventListener('DOMContentLoaded', updateVisitorCount);
 
     </script>
 </body>
