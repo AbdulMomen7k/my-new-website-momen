@@ -202,7 +202,7 @@
                 
                 <!-- Profile Image (Portrait) -->
                 <div class="relative w-56 h-72 sm:w-64 sm:h-80 md:w-80 md:h-[30rem] rounded-2xl overflow-hidden border-4 border-white shadow-2xl transform hover:scale-105 transition duration-500">
-                    <img src="Artboard 1.png" alt="MD Abdul Momen" class="w-full h-full object-cover">
+                    <img src="Artboard 1.pিই" alt="MD Abdul Momen" class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
@@ -718,7 +718,7 @@
             </div>
 
             <div class="bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-gray-200 reveal">
-                <form id="contactForm" action="https://formsubmit.co/ajax/mdabdulmomen7k@gmail.com" method="POST" class="space-y-5 md:space-y-6">
+                <form action="https://formsubmit.co/mdabdulmomen7k@gmail.com" method="POST" class="space-y-5 md:space-y-6">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="text" name="_honey" style="display:none">
                     <input type="hidden" name="_template" value="table">
@@ -742,12 +742,9 @@
                         <label class="block text-sm font-medium text-gray-600 mb-1.5 md:mb-2">Message</label>
                         <textarea name="message" rows="4" placeholder="Your Message..." required class="w-full px-4 py-2.5 md:py-3 bg-dark border border-gray-300 rounded-lg focus:outline-none focus:border-primary text-gray-900 transition text-sm md:text-base"></textarea>
                     </div>
-                    <button type="submit" id="submitBtn" class="w-full py-3 bg-primary text-white font-bold rounded-lg hover:bg-blue-600 transition shadow-lg shadow-blue-500/30 text-sm md:text-base flex items-center justify-center">
+                    <button type="submit" class="w-full py-3 bg-primary text-white font-bold rounded-lg hover:bg-blue-600 transition shadow-lg shadow-blue-500/30 text-sm md:text-base flex items-center justify-center">
                         <span>Send Message</span> <i class="fas fa-paper-plane ml-2"></i>
                     </button>
-                    
-                    <!-- Message Box for Success/Error -->
-                    <div id="formMessage" class="hidden w-full mt-4 p-3 rounded-lg text-center text-sm font-medium transition duration-300"></div>
                 </form>
             </div>
         </div>
@@ -972,66 +969,6 @@
         }
         
         document.addEventListener('DOMContentLoaded', updateVisitorCount);
-
-        // Contact Form AJAX Submission
-        const contactForm = document.getElementById('contactForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const formMessage = document.getElementById('formMessage');
-
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault(); // Prevent page reload
-                
-                // Change button state to loading
-                const originalBtnContent = submitBtn.innerHTML;
-                submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin ml-2"></i>';
-                submitBtn.disabled = true;
-                submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
-                
-                formMessage.classList.add('hidden'); // Hide previous messages
-
-                const formData = new FormData(contactForm);
-
-                fetch(contactForm.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    formMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'bg-yellow-100', 'text-yellow-800');
-                    formMessage.classList.add('bg-green-100', 'text-green-700');
-                    
-                    // Show success or activation prompt
-                    if(data.success === "false" || (data.message && data.message.includes("activate"))) {
-                        formMessage.innerHTML = "⚠️ Please check your email (" + "mdabdulmomen7k@gmail.com" + ") and click 'Activate' first.";
-                        formMessage.classList.replace('bg-green-100', 'bg-yellow-100');
-                        formMessage.classList.replace('text-green-700', 'text-yellow-800');
-                    } else {
-                        formMessage.innerHTML = "<i class='fas fa-check-circle mr-2'></i> Message sent successfully!";
-                        contactForm.reset();
-                    }
-                })
-                .catch(error => {
-                    formMessage.classList.remove('hidden', 'bg-green-100', 'text-green-700', 'bg-yellow-100', 'text-yellow-800');
-                    formMessage.classList.add('bg-red-100', 'text-red-700');
-                    formMessage.innerHTML = "<i class='fas fa-exclamation-circle mr-2'></i> FormSubmit সার্ভারটি বর্তমানে ডাউন আছে অথবা প্রিভিউ ব্লক হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।";
-                })
-                .finally(() => {
-                    // Restore button state
-                    submitBtn.innerHTML = originalBtnContent;
-                    submitBtn.disabled = false;
-                    submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
-                    
-                    // Auto-hide message after 8 seconds
-                    setTimeout(() => {
-                        formMessage.classList.add('hidden');
-                    }, 8000);
-                });
-            });
-        }
 
     </script>
 </body>
